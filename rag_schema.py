@@ -4,7 +4,7 @@ from langchain_community.vectorstores import FAISS
 from langchain_community.embeddings import HuggingFaceEmbeddings
 from langchain_core.documents import Document
 
-# Define the schema descriptions (The "Ground Truth" for the Semantic Layer)
+# Schema definitions
 SCHEMA_DESCRIPTIONS = {
     "customers": "Contains customer information including unique ID, name, join date, and geographical region. Use this table to filter by customer demographics or tenure.",
     "products": "Catalog of available items. Columns include product ID, name, category (e.g., Electronics, Clothing), price, and current inventory count. Use this for product-related queries.",
@@ -14,10 +14,7 @@ SCHEMA_DESCRIPTIONS = {
 
 class SchemaRetriever:
     def __init__(self):
-        """
-        Initialize the Schema Retriever.
-        Uses HuggingFaceEmbeddings for local, cost-effective embedding generation.
-        """
+        """Initialize the Schema Retriever."""
         print("Initializing Schema Retriever...")
         # Using a small, efficient model for embeddings
         self.embeddings = HuggingFaceEmbeddings(model_name="all-MiniLM-L6-v2")
@@ -25,9 +22,7 @@ class SchemaRetriever:
         print("Schema Retriever Initialized.")
 
     def _build_vector_store(self) -> FAISS:
-        """
-        Index the schema descriptions into a FAISS vector store.
-        """
+        """Index the schema descriptions into a FAISS vector store."""
         documents = []
         for table_name, description in SCHEMA_DESCRIPTIONS.items():
             # We embed the description, but store the table name as metadata

@@ -67,26 +67,26 @@ def create_tables(conn):
     print("Tables created successfully.")
 
 def seed_data(conn):
-    """Seed the database with realistic, messy data."""
+    """Seed the database with realistic data."""
     cursor = conn.cursor()
     
-    # --- Seed Customers ---
+    # Seed Customers
     print("Seeding customers...")
-    regions = ['North', 'South', 'East', 'West', None, 'n/a', 'Northeast'] # Messy regions
+    regions = ['North', 'South', 'East', 'West', None, 'n/a', 'Northeast']
     names = ['Alice Smith', 'Bob Jones', 'Charlie Brown', 'David Wilson', 'Eva Green', 'Frank White', 'Grace Hall']
     
     customers_data = []
     for i in range(20):
-        name = random.choice(names) + f" {i}" # Unique-ish names
+        name = random.choice(names) + f" {i}"
         join_date = (datetime.now() - timedelta(days=random.randint(0, 365*2))).strftime('%Y-%m-%d')
         region = random.choice(regions)
         customers_data.append((name, join_date, region))
         
     cursor.executemany("INSERT INTO customers (name, join_date, region) VALUES (?, ?, ?)", customers_data)
 
-    # --- Seed Products ---
+    # Seed Products
     print("Seeding products...")
-    categories = ['Electronics', 'electronics', 'Clothing', 'Home', 'Books', 'Toys', 'ELECTRONICS'] # Mixed casing
+    categories = ['Electronics', 'electronics', 'Clothing', 'Home', 'Books', 'Toys', 'ELECTRONICS']
     product_names = {
         'Electronics': ['Smartphone', 'Laptop', 'Headphones', 'Monitor', 'Keyboard'],
         'Clothing': ['T-Shirt', 'Jeans', 'Jacket', 'Sneakers', 'Hat'],
@@ -98,7 +98,7 @@ def seed_data(conn):
     products_data = []
     for i in range(50):
         category = random.choice(categories)
-        # Normalize category for lookup (handle mixed casing)
+        # Normalize category for lookup
         lookup_cat = category.capitalize() if category.capitalize() in product_names else 'Electronics'
         name = random.choice(product_names.get(lookup_cat, ['Generic Product'])) + f" {random.randint(100, 999)}"
         price = round(random.uniform(10.0, 1000.0), 2)
@@ -107,7 +107,7 @@ def seed_data(conn):
         
     cursor.executemany("INSERT INTO products (name, category, price, inventory_count) VALUES (?, ?, ?, ?)", products_data)
 
-    # --- Seed Orders ---
+    # Seed Orders
     print("Seeding orders...")
     statuses = ['Pending', 'Shipped', 'Delivered', 'Cancelled', 'returned']
     
@@ -122,7 +122,7 @@ def seed_data(conn):
         
     cursor.executemany("INSERT INTO orders (customer_id, order_date, status) VALUES (?, ?, ?)", orders_data)
 
-    # --- Seed Order Items ---
+    # Seed Order Items
     print("Seeding order items...")
     order_ids = [row[0] for row in cursor.execute("SELECT id FROM orders").fetchall()]
     product_ids = [row[0] for row in cursor.execute("SELECT id FROM products").fetchall()]

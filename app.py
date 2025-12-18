@@ -23,11 +23,11 @@ Ask questions about your E-commerce data (Customers, Products, Orders).
 from dotenv import load_dotenv
 load_dotenv()
 
-# Initialize Agent with Hardcoded Groq Configuration
+# Initialize Agent
 if "agent" not in st.session_state:
     api_key = os.environ.get("GROQ_API_KEY")
     if not api_key:
-        st.error("GROQ_API_KEY not found in environment variables.")
+        st.error("GROQ_API_KEY not found.")
     else:
         st.session_state.agent = SQLAgent(
             model_name="llama-3.3-70b-versatile",

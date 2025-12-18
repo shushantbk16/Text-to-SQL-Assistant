@@ -51,11 +51,8 @@ class SQLAgent:
             return f"Error: {str(e)}"
 
     def _classify_query(self, query: str) -> bool:
-        """
-        Step 1: Classification.
-        Determine if the query is relevant to the database schema.
-        """
-        if not self.llm: return True # Skip if no LLM
+        """Determine if the query is relevant to the database schema."""
+        if not self.llm: return True
 
         system_prompt = """You are a helpful assistant. 
         Your task is to determine if a user's query can be answered by a database with the following tables: 
@@ -76,9 +73,7 @@ class SQLAgent:
         return result.strip().upper() == "YES"
 
     def _generate_sql(self, query: str, schema_context: str, error_context: str = None) -> str:
-        """
-        Step 2 & 3 (Fix): Generate SQL based on schema and optional error context.
-        """
+        """Generate SQL based on schema and optional error context."""
         system_prompt = f"""You are an expert SQLite developer.
         Given the following database schema:
         {schema_context}

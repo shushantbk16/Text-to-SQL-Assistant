@@ -3,6 +3,4 @@ langchain-community
 langchain-openai
 rank_bm25
 streamlit
-watchdog
-pandas
 python-dotenv

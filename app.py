@@ -95,26 +95,41 @@ with tab1:
 with tab2:
     st.header("Database Schema & Content")
     import sqlite3
-    import pandas as pd
     from setup_db import DB_NAME
     
     try:
         conn = sqlite3.connect(DB_NAME)
+        cursor = conn.cursor()
         
         # Get all tables
-        tables = pd.read_sql("SELECT name FROM sqlite_master WHERE type='table'", conn)
+        cursor.execute("SELECT name FROM sqlite_master WHERE type='table'")
+        tables = cursor.fetchall()
         
-        if not tables.empty:
-            selected_table = st.selectbox("Select Table", tables["name"].tolist())
+        if tables:
+            table_names = [t[0] for t in tables]
+            selected_table = st.selectbox("Select Table", table_names)
             
             if selected_table:
                 st.subheader(f"Table: {selected_table}")
-                df = pd.read_sql(f"SELECT * FROM {selected_table} LIMIT 50", conn)
-                st.dataframe(df)
-                st.caption(f"Showing first {len(df)} rows.")
+                
+                # Get columns
+                cursor.execute(f"PRAGMA table_info({selected_table})")
+                columns_info = cursor.fetchall()
+                column_names = [col[1] for col in columns_info]
+                
+                # Get data
+                cursor.execute(f"SELECT * FROM {selected_table} LIMIT 10")
+                rows = cursor.fetchall()
+                
+                # Display as a simple table using Streamlit
+                # Convert to list of dicts for st.dataframe or just list of lists
+                st.write(f"Showing first 10 rows of {selected_table}")
+                st.dataframe([dict(zip(column_names, row)) for row in rows])
+                
         else:
             st.info("No tables found in the database.")
             
         conn.close()
+        
     except Exception as e:
         st.error(f"Error connecting to database: {e}")

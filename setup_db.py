@@ -4,7 +4,9 @@ from datetime import datetime, timedelta
 import os
 
 # Database file
-DB_NAME = "ecommerce.db"
+import os
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+DB_NAME = os.path.join(BASE_DIR, "ecommerce.db")
 
 def create_connection():
     """Create a database connection to the SQLite database."""

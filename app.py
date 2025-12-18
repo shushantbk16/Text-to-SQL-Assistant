@@ -105,6 +105,17 @@ with tab2:
         cursor.execute("SELECT name FROM sqlite_master WHERE type='table'")
         tables = cursor.fetchall()
         
+        # Self-Healing: If no tables, seed the database
+        if not tables:
+            st.warning("Database empty. Seeding data...")
+            from setup_db import create_tables, seed_data
+            create_tables(conn)
+            seed_data(conn)
+            st.success("Database seeded successfully! Please refresh.")
+            # Re-fetch tables
+            cursor.execute("SELECT name FROM sqlite_master WHERE type='table'")
+            tables = cursor.fetchall()
+        
         if tables:
             table_names = [t[0] for t in tables]
             selected_table = st.selectbox("Select Table", table_names)

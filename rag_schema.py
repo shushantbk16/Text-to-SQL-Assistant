@@ -1,7 +1,4 @@
-import json
-from typing import List, Dict
-from langchain_community.vectorstores import FAISS
-from langchain_community.embeddings import FastEmbedEmbeddings
+from langchain_community.retrievers import BM25Retriever
 from langchain_core.documents import Document
 
 # Schema definitions
@@ -16,13 +13,12 @@ class SchemaRetriever:
     def __init__(self):
         """Initialize the Schema Retriever."""
         print("Initializing Schema Retriever...")
-        # Using FastEmbed for lightweight, CPU-optimized embeddings (No PyTorch required)
-        self.embeddings = FastEmbedEmbeddings(model_name="BAAI/bge-small-en-v1.5")
-        self.vector_store = self._build_vector_store()
+        # Using BM25 for lightweight, memory-efficient retrieval (No Neural Model required)
+        self.retriever = self._build_retriever()
         print("Schema Retriever Initialized.")
 
-    def _build_vector_store(self) -> FAISS:
-        """Index the schema descriptions into a FAISS vector store."""
+    def _build_retriever(self) -> BM25Retriever:
+        """Index the schema descriptions into a BM25 retriever."""
         documents = []
         for table_name, description in SCHEMA_DESCRIPTIONS.items():
             # We embed the description, but store the table name as metadata
@@ -32,14 +28,15 @@ class SchemaRetriever:
             )
             documents.append(doc)
         
-        return FAISS.from_documents(documents, self.embeddings)
+        return BM25Retriever.from_documents(documents)
 
     def get_relevant_tables(self, query: str, k: int = 3) -> List[str]:
         """
         Retrieve the top k most relevant tables for a given user query.
         """
         print(f"Retrieving tables for query: '{query}'")
-        docs = self.vector_store.similarity_search(query, k=k)
+        self.retriever.k = k
+        docs = self.retriever.invoke(query)
         
         relevant_tables = [doc.metadata["table_name"] for doc in docs]
         print(f"Retrieved tables: {relevant_tables}")

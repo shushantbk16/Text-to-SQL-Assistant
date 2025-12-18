@@ -1,8 +1,7 @@
 langchain
 langchain-community
 langchain-openai
-faiss-cpu
-fastembed
+rank_bm25
 streamlit
 watchdog
 pandas

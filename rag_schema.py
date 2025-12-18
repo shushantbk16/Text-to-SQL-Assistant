@@ -1,7 +1,7 @@
 import json
 from typing import List, Dict
 from langchain_community.vectorstores import FAISS
-from langchain_community.embeddings import HuggingFaceEmbeddings
+from langchain_community.embeddings import FastEmbedEmbeddings
 from langchain_core.documents import Document
 
 # Schema definitions
@@ -16,8 +16,8 @@ class SchemaRetriever:
     def __init__(self):
         """Initialize the Schema Retriever."""
         print("Initializing Schema Retriever...")
-        # Using a small, efficient model for embeddings
-        self.embeddings = HuggingFaceEmbeddings(model_name="all-MiniLM-L6-v2")
+        # Using FastEmbed for lightweight, CPU-optimized embeddings (No PyTorch required)
+        self.embeddings = FastEmbedEmbeddings(model_name="BAAI/bge-small-en-v1.5")
         self.vector_store = self._build_vector_store()
         print("Schema Retriever Initialized.")
 

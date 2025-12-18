@@ -2,7 +2,7 @@ langchain
 langchain-community
 langchain-openai
 faiss-cpu
-sentence-transformers
+fastembed
 streamlit
 watchdog
 pandas

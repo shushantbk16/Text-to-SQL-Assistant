@@ -24,16 +24,23 @@ from dotenv import load_dotenv
 load_dotenv()
 
 # Initialize Agent
+# Initialize Agent
 if "agent" not in st.session_state:
+    # st.write("Debug: Checking API Key...")
     api_key = os.environ.get("GROQ_API_KEY")
     if not api_key:
         st.error("GROQ_API_KEY not found.")
     else:
-        st.session_state.agent = SQLAgent(
-            model_name="llama-3.3-70b-versatile",
-            base_url="https://api.groq.com/openai/v1",
-            api_key=api_key
-        )
+        try:
+            with st.spinner("Initializing AI Agent... (This may take a minute)"):
+                st.session_state.agent = SQLAgent(
+                    model_name="llama-3.3-70b-versatile",
+                    base_url="https://api.groq.com/openai/v1",
+                    api_key=api_key
+                )
+            # st.success("Agent Initialized!")
+        except Exception as e:
+            st.error(f"Failed to initialize agent: {e}")
 
 
 # Chat Interface

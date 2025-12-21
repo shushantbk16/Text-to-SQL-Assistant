@@ -14,7 +14,7 @@ class SchemaRetriever:
     def __init__(self):
         """Initialize the Schema Retriever."""
         print("Initializing Schema Retriever...")
-        # Using BM25 for lightweight, memory-efficient retrieval (No Neural Model required)
+        # Using BM25 for lightweight, memory-efficient retrieval
         self.retriever = self._build_retriever()
         print("Schema Retriever Initialized.")
 
@@ -22,7 +22,7 @@ class SchemaRetriever:
         """Index the schema descriptions into a BM25 retriever."""
         documents = []
         for table_name, description in SCHEMA_DESCRIPTIONS.items():
-            # We embed the description, but store the table name as metadata
+
             doc = Document(
                 page_content=description,
                 metadata={"table_name": table_name}
@@ -57,7 +57,7 @@ class SchemaRetriever:
             cursor = conn.cursor()
             
             for table in table_names:
-                # Get the CREATE TABLE statement from sqlite_master
+
                 cursor.execute("SELECT sql FROM sqlite_master WHERE type='table' AND name=?", (table,))
                 result = cursor.fetchone()
                 if result:
@@ -71,7 +71,7 @@ class SchemaRetriever:
         return "\n".join(schema_strings)
 
 if __name__ == "__main__":
-    # Test the retriever
+
     retriever = SchemaRetriever()
     
     test_queries = [

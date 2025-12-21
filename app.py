@@ -24,9 +24,9 @@ from dotenv import load_dotenv
 load_dotenv()
 
 # Initialize Agent
-# Initialize Agent
+
 if "agent" not in st.session_state:
-    # st.write("Debug: Checking API Key...")
+
     api_key = os.environ.get("GROQ_API_KEY")
     if not api_key:
         st.error("GROQ_API_KEY not found.")
@@ -38,7 +38,7 @@ if "agent" not in st.session_state:
                     base_url="https://api.groq.com/openai/v1",
                     api_key=api_key
                 )
-            # st.success("Agent Initialized!")
+
         except Exception as e:
             st.error(f"Failed to initialize agent: {e}")
 
@@ -150,8 +150,8 @@ with tab2:
                 cursor.execute(f"SELECT * FROM {selected_table} LIMIT 10")
                 rows = cursor.fetchall()
                 
-                # Display as a simple table using Streamlit
-                # Convert to list of dicts for st.dataframe or just list of lists
+
+
                 st.write(f"Showing first 10 rows of {selected_table}")
                 st.dataframe([dict(zip(column_names, row)) for row in rows])
                 

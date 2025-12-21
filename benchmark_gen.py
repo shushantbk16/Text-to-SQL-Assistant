@@ -7,7 +7,7 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-# Configuration
+
 NUM_QUESTIONS = 50
 OUTPUT_FILE = "benchmark_data.json"
 

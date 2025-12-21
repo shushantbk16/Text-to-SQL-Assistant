@@ -3,8 +3,8 @@ import random
 from datetime import datetime, timedelta
 import os
 
-# Database file
-import os
+
+
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 DB_NAME = os.path.join(BASE_DIR, "ecommerce.db")
 
@@ -22,7 +22,7 @@ def create_tables(conn):
     """Create tables in the database."""
     cursor = conn.cursor()
 
-    # Customers Table
+
     cursor.execute("""
     CREATE TABLE IF NOT EXISTS customers (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -32,7 +32,7 @@ def create_tables(conn):
     );
     """)
 
-    # Products Table
+
     cursor.execute("""
     CREATE TABLE IF NOT EXISTS products (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -43,7 +43,7 @@ def create_tables(conn):
     );
     """)
 
-    # Orders Table
+
     cursor.execute("""
     CREATE TABLE IF NOT EXISTS orders (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -54,7 +54,7 @@ def create_tables(conn):
     );
     """)
 
-    # Order Items Table
+
     cursor.execute("""
     CREATE TABLE IF NOT EXISTS order_items (
         order_id INTEGER,
@@ -72,7 +72,7 @@ def seed_data(conn):
     """Seed the database with realistic data."""
     cursor = conn.cursor()
     
-    # Seed Customers
+
     print("Seeding customers...")
     regions = ['North', 'South', 'East', 'West', None, 'n/a', 'Northeast']
     names = ['Alice Smith', 'Bob Jones', 'Charlie Brown', 'David Wilson', 'Eva Green', 'Frank White', 'Grace Hall']
@@ -86,7 +86,7 @@ def seed_data(conn):
         
     cursor.executemany("INSERT INTO customers (name, join_date, region) VALUES (?, ?, ?)", customers_data)
 
-    # Seed Products
+
     print("Seeding products...")
     categories = ['Electronics', 'electronics', 'Clothing', 'Home', 'Books', 'Toys', 'ELECTRONICS']
     product_names = {
@@ -109,7 +109,7 @@ def seed_data(conn):
         
     cursor.executemany("INSERT INTO products (name, category, price, inventory_count) VALUES (?, ?, ?, ?)", products_data)
 
-    # Seed Orders
+
     print("Seeding orders...")
     statuses = ['Pending', 'Shipped', 'Delivered', 'Cancelled', 'returned']
     
@@ -124,14 +124,14 @@ def seed_data(conn):
         
     cursor.executemany("INSERT INTO orders (customer_id, order_date, status) VALUES (?, ?, ?)", orders_data)
 
-    # Seed Order Items
+
     print("Seeding order items...")
     order_ids = [row[0] for row in cursor.execute("SELECT id FROM orders").fetchall()]
     product_ids = [row[0] for row in cursor.execute("SELECT id FROM products").fetchall()]
     
     order_items_data = []
     for order_id in order_ids:
-        # Each order has 1-5 items
+
         num_items = random.randint(1, 5)
         selected_products = random.sample(product_ids, num_items)
         for product_id in selected_products:
@@ -144,7 +144,7 @@ def seed_data(conn):
     print("Database seeded successfully.")
 
 def main():
-    # Remove existing db to start fresh
+
     if os.path.exists(DB_NAME):
         os.remove(DB_NAME)
         

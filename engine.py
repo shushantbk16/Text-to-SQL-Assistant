@@ -14,8 +14,7 @@ from rag_schema import SchemaRetriever
 from setup_db import DB_NAME
 
 # --- Configuration ---
-# In a real app, load this from .env
-# os.environ["OPENAI_API_KEY"] = "sk-..." 
+ 
 
 class SQLResponse(BaseModel):
     answer: str = Field(description="The final natural language answer to the user's question.")
@@ -43,7 +42,7 @@ class SQLAgent:
         try:
             redis_url = os.environ.get("REDIS_URL", "redis://localhost:6379")
             self.redis_client = redis.from_url(redis_url, decode_responses=True)
-            self.redis_client.ping() # Test connection
+            self.redis_client.ping()
             print("Redis connected successfully.")
         except Exception as e:
             print(f"Warning: Redis connection failed. Caching disabled. {e}")
@@ -150,7 +149,7 @@ class SQLAgent:
         if not self.llm:
             return {"answer": "LLM not initialized. Check API Key.", "sql": "", "reasoning": "System Error"}
 
-        # 0. Check Cache
+        # Check Cache
         cache_key = f"query:{query.strip().lower()}"
         if self.redis_client:
             try:
@@ -161,7 +160,7 @@ class SQLAgent:
             except Exception as e:
                 print(f"Redis Error: {e}")
 
-        # 1. Classification
+        # Classification
         classification = self._classify_query(query)
         
         if classification == "NO":
@@ -179,11 +178,11 @@ class SQLAgent:
                 "is_clarification": True
             }
 
-        # 2. Retrieval
+        # Retrieval
         relevant_tables = self.schema_retriever.get_relevant_tables(query)
         schema_context = self.schema_retriever.get_schema_string(relevant_tables)
         
-        # 3. Generation & Self-Correction Loop
+        # Generation & Self-Correction Loop
         max_retries = 2
         current_sql = self._generate_sql(query, schema_context)
         last_error = None
@@ -223,7 +222,7 @@ class SQLAgent:
                 return response
 
 if __name__ == "__main__":
-    # Test run
+
     agent = SQLAgent()
     if os.environ.get("OPENAI_API_KEY"):
         response = agent.process_query("How many customers are in the North region?")

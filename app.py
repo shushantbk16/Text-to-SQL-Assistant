@@ -42,6 +42,27 @@ if "agent" not in st.session_state:
         except Exception as e:
             st.error(f"Failed to initialize agent: {e}")
 
+# Self-Healing Database Check (Run once on load)
+if "db_checked" not in st.session_state:
+    import sqlite3
+    from setup_db import DB_NAME, create_tables, seed_data
+    
+    try:
+        conn = sqlite3.connect(DB_NAME)
+        cursor = conn.cursor()
+        cursor.execute("SELECT name FROM sqlite_master WHERE type='table'")
+        tables = cursor.fetchall()
+        
+        if not tables:
+            with st.spinner("Database empty. Seeding data..."):
+                create_tables(conn)
+                seed_data(conn)
+            st.success("Database seeded successfully!")
+        
+        conn.close()
+        st.session_state.db_checked = True
+    except Exception as e:
+        st.error(f"Database check failed: {e}")
 
 # Chat Interface
 tab1, tab2 = st.tabs(["💬 Chat", "🗃️ Database Preview"])
@@ -75,19 +96,27 @@ with tab1:
                     try:
                         response = st.session_state.agent.process_query(prompt)
                         
-                        st.markdown(response["answer"])
-                        
-                        # Add assistant message to chat history
-                        st.session_state.messages.append({
-                            "role": "assistant", 
-                            "content": response["answer"],
-                            "sql": response["sql"],
-                            "reasoning": response["reasoning"]
-                        })
-                        
-                        with st.expander("View SQL & Reasoning"):
-                            st.code(response["sql"], language="sql")
-                            st.markdown(f"**Reasoning:** {response['reasoning']}")
+                        # Check if it's a clarification question
+                        if response.get("is_clarification"):
+                            st.info(f"🤔 **Clarification Needed:** {response['answer']}")
+                            st.session_state.messages.append({
+                                "role": "assistant", 
+                                "content": response["answer"]
+                            })
+                        else:
+                            st.markdown(response["answer"])
+                            
+                            # Add assistant message to chat history
+                            st.session_state.messages.append({
+                                "role": "assistant", 
+                                "content": response["answer"],
+                                "sql": response["sql"],
+                                "reasoning": response["reasoning"]
+                            })
+                            
+                            with st.expander("View SQL & Reasoning"):
+                                st.code(response["sql"], language="sql")
+                                st.markdown(f"**Reasoning:** {response['reasoning']}")
                             
                     except Exception as e:
                         st.error(f"An error occurred: {e}")
@@ -104,17 +133,6 @@ with tab2:
         # Get all tables
         cursor.execute("SELECT name FROM sqlite_master WHERE type='table'")
         tables = cursor.fetchall()
-        
-        # Self-Healing: If no tables, seed the database
-        if not tables:
-            st.warning("Database empty. Seeding data...")
-            from setup_db import create_tables, seed_data
-            create_tables(conn)
-            seed_data(conn)
-            st.success("Database seeded successfully! Please refresh.")
-            # Re-fetch tables
-            cursor.execute("SELECT name FROM sqlite_master WHERE type='table'")
-            tables = cursor.fetchall()
         
         if tables:
             table_names = [t[0] for t in tables]

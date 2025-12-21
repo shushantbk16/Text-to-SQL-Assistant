@@ -1,0 +1,401 @@
+[
+  {
+    "question": "What are the top 5 products with the highest average order value for customers in the United States?",
+    "difficulty": "Hard",
+    "expected_tables": [
+      "customers",
+      "orders",
+      "order_items",
+      "products"
+    ]
+  },
+  {
+    "question": "What is the total revenue generated from orders placed by customers in the 25-44 age group in the last quarter?",
+    "difficulty": "Hard",
+    "expected_tables": [
+      "customers",
+      "orders",
+      "order_items",
+      "products"
+    ]
+  },
+  {
+    "question": "List the top 10 customers who have placed the most orders in the last 6 months, along with their total order value.",
+    "difficulty": "Hard",
+    "expected_tables": [
+      "customers",
+      "orders",
+      "order_items",
+      "products"
+    ]
+  },
+  {
+    "question": "What is the average order value for customers who have purchased products from the 'Electronics' category?",
+    "difficulty": "Hard",
+    "expected_tables": [
+      "customers",
+      "orders",
+      "order_items",
+      "products"
+    ]
+  },
+  {
+    "question": "Which product has the highest sales count for orders placed in the 'Pending' status?",
+    "difficulty": "Hard",
+    "expected_tables": [
+      "orders",
+      "order_items",
+      "products"
+    ]
+  },
+  {
+    "question": "What is the total number of orders placed by customers from the 'Europe' region in the last year?",
+    "difficulty": "Hard",
+    "expected_tables": [
+      "customers",
+      "orders"
+    ]
+  },
+  {
+    "question": "Rank the top 3 products by their total revenue generated from orders placed in the last 3 months.",
+    "difficulty": "Hard",
+    "expected_tables": [
+      "orders",
+      "order_items",
+      "products"
+    ]
+  },
+  {
+    "question": "What is the average customer rating for products from the 'Fashion' category?",
+    "difficulty": "Hard",
+    "expected_tables": [
+      "customers",
+      "orders",
+      "order_items",
+      "products"
+    ]
+  },
+  {
+    "question": "List the top 5 customers who have spent the most on products from the 'Home' category.",
+    "difficulty": "Hard",
+    "expected_tables": [
+      "customers",
+      "orders",
+      "order_items",
+      "products"
+    ]
+  },
+  {
+    "question": "What is the total revenue generated from orders placed by customers who have a 'Gold' loyalty status?",
+    "difficulty": "Hard",
+    "expected_tables": [
+      "customers",
+      "orders",
+      "order_items",
+      "products"
+    ]
+  },
+  {
+    "question": "What are the top 10 products with the highest sales count for orders placed in the 'Shipped' status?",
+    "difficulty": "Hard",
+    "expected_tables": [
+      "orders",
+      "order_items",
+      "products"
+    ]
+  },
+  {
+    "question": "What is the average order value for customers who have purchased products from multiple categories?",
+    "difficulty": "Hard",
+    "expected_tables": [
+      "customers",
+      "orders",
+      "order_items",
+      "products"
+    ]
+  },
+  {
+    "question": "Which customer has the highest total order value for orders placed in the last 9 months?",
+    "difficulty": "Hard",
+    "expected_tables": [
+      "customers",
+      "orders",
+      "order_items",
+      "products"
+    ]
+  },
+  {
+    "question": "What is the total number of orders placed by customers from the 'Asia' region in the last quarter?",
+    "difficulty": "Hard",
+    "expected_tables": [
+      "customers",
+      "orders"
+    ]
+  },
+  {
+    "question": "Rank the top 5 products by their average customer rating for orders placed in the last 6 months.",
+    "difficulty": "Hard",
+    "expected_tables": [
+      "customers",
+      "orders",
+      "order_items",
+      "products"
+    ]
+  },
+  {
+    "question": "What is the total revenue generated from orders placed by customers who have a 'Silver' loyalty status?",
+    "difficulty": "Hard",
+    "expected_tables": [
+      "customers",
+      "orders",
+      "order_items",
+      "products"
+    ]
+  },
+  {
+    "question": "What are the top 3 products with the highest sales count for orders placed in the 'Pending' status?",
+    "difficulty": "Hard",
+    "expected_tables": [
+      "orders",
+      "order_items",
+      "products"
+    ]
+  },
+  {
+    "question": "What is the average customer rating for products from the 'Electronics' category?",
+    "difficulty": "Hard",
+    "expected_tables": [
+      "customers",
+      "orders",
+      "order_items",
+      "products"
+    ]
+  },
+  {
+    "question": "List the top 10 customers who have placed the most orders in the last year, along with their total order value.",
+    "difficulty": "Hard",
+    "expected_tables": [
+      "customers",
+      "orders",
+      "order_items",
+      "products"
+    ]
+  },
+  {
+    "question": "What is the total number of orders placed by customers from the 'North America' region in the last 6 months?",
+    "difficulty": "Hard",
+    "expected_tables": [
+      "customers",
+      "orders"
+    ]
+  },
+  {
+    "question": "Rank the top 10 products by their total revenue generated from orders placed in the last 9 months.",
+    "difficulty": "Hard",
+    "expected_tables": [
+      "orders",
+      "order_items",
+      "products"
+    ]
+  },
+  {
+    "question": "What is the average order value for customers who have purchased products from the 'Fashion' category?",
+    "difficulty": "Hard",
+    "expected_tables": [
+      "customers",
+      "orders",
+      "order_items",
+      "products"
+    ]
+  },
+  {
+    "question": "What are the top 5 customers who have spent the most on products from the 'Electronics' category?",
+    "difficulty": "Hard",
+    "expected_tables": [
+      "customers",
+      "orders",
+      "order_items",
+      "products"
+    ]
+  },
+  {
+    "question": "What is the total revenue generated from orders placed by customers who have a 'Bronze' loyalty status?",
+    "difficulty": "Hard",
+    "expected_tables": [
+      "customers",
+      "orders",
+      "order_items",
+      "products"
+    ]
+  },
+  {
+    "question": "What is the average customer rating for products from the 'Home' category?",
+    "difficulty": "Hard",
+    "expected_tables": [
+      "customers",
+      "orders",
+      "order_items",
+      "products"
+    ]
+  },
+  {
+    "question": "List the top 10 products with the highest sales count for orders placed in the 'Shipped' status.",
+    "difficulty": "Hard",
+    "expected_tables": [
+      "orders",
+      "order_items",
+      "products"
+    ]
+  },
+  {
+    "question": "What is the total number of orders placed by customers from the 'South America' region in the last quarter?",
+    "difficulty": "Hard",
+    "expected_tables": [
+      "customers",
+      "orders"
+    ]
+  },
+  {
+    "question": "Rank the top 3 customers by their total order value for orders placed in the last 3 months.",
+    "difficulty": "Hard",
+    "expected_tables": [
+      "customers",
+      "orders",
+      "order_items",
+      "products"
+    ]
+  },
+  {
+    "question": "What is the average order value for customers who have purchased products from multiple categories?",
+    "difficulty": "Hard",
+    "expected_tables": [
+      "customers",
+      "orders",
+      "order_items",
+      "products"
+    ]
+  },
+  {
+    "question": "What are the top 10 products with the highest sales count for orders placed in the 'Pending' status?",
+    "difficulty": "Hard",
+    "expected_tables": [
+      "orders",
+      "order_items",
+      "products"
+    ]
+  },
+  {
+    "question": "What is the total revenue generated from orders placed by customers who have a 'Gold' loyalty status?",
+    "difficulty": "Hard",
+    "expected_tables": [
+      "customers",
+      "orders",
+      "order_items",
+      "products"
+    ]
+  },
+  {
+    "question": "What is the average customer rating for products from the 'Fashion' category?",
+    "difficulty": "Hard",
+    "expected_tables": [
+      "customers",
+      "orders",
+      "order_items",
+      "products"
+    ]
+  },
+  {
+    "question": "List the top 5 customers who have placed the most orders in the last year, along with their total order value.",
+    "difficulty": "Hard",
+    "expected_tables": [
+      "customers",
+      "orders",
+      "order_items",
+      "products"
+    ]
+  },
+  {
+    "question": "What is the total number of orders placed by customers from the 'Africa' region in the last 9 months?",
+    "difficulty": "Hard",
+    "expected_tables": [
+      "customers",
+      "orders"
+    ]
+  },
+  {
+    "question": "Rank the top 5 products by their total revenue generated from orders placed in the last 6 months.",
+    "difficulty": "Hard",
+    "expected_tables": [
+      "orders",
+      "order_items",
+      "products"
+    ]
+  },
+  {
+    "question": "What is the average order value for customers who have purchased products from the 'Electronics' category?",
+    "difficulty": "Hard",
+    "expected_tables": [
+      "customers",
+      "orders",
+      "order_items",
+      "products"
+    ]
+  },
+  {
+    "question": "What are the top 3 customers who have spent the most on products from the 'Home' category?",
+    "difficulty": "Hard",
+    "expected_tables": [
+      "customers",
+      "orders",
+      "order_items",
+      "products"
+    ]
+  },
+  {
+    "question": "What is the total revenue generated from orders placed by customers who have a 'Silver' loyalty status?",
+    "difficulty": "Hard",
+    "expected_tables": [
+      "customers",
+      "orders",
+      "order_items",
+      "products"
+    ]
+  },
+  {
+    "question": "What is the average customer rating for products from the 'Electronics' category?",
+    "difficulty": "Hard",
+    "expected_tables": [
+      "customers",
+      "orders",
+      "order_items",
+      "products"
+    ]
+  },
+  {
+    "question": "List the top 10 products with the highest sales count for orders placed in the 'Shipped' status.",
+    "difficulty": "Hard",
+    "expected_tables": [
+      "orders",
+      "order_items",
+      "products"
+    ]
+  },
+  {
+    "question": "What is the total number of orders placed by customers from the 'Europe' region in the last 3 months?",
+    "difficulty": "Hard",
+    "expected_tables": [
+      "customers",
+      "orders"
+    ]
+  },
+  {
+    "question": "Rank the top 10 products by their average customer rating for orders placed in the last 9 months.",
+    "difficulty": "Hard",
+    "expected_tables": [
+      "customers",
+      "orders",
+      "order_items",
+      "products"
+    ]
+  }
+]
